@@ -52,7 +52,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
     private void loadMinigameConfig() {
         // load config
         minigameConfig = new YamlConfiguration();
-        try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("/minigame.yml"))) {
+        try (Reader reader = new InputStreamReader(getClass().getResourceAsStream("/minigame/config.yml"))) {
             minigameConfig.load(reader);
         } catch (IOException e) {
             getLogger().severe("IO error loading minigame profile.  Make sure you include it in the jar!");

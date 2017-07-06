@@ -1,0 +1,12 @@
+# MinigameLib config
+
+# Database settings
+database:
+  # If true, a database will be automatically connected.
+  enabled: false
+
+  # If true, the database will be loaded from db.cfg
+  autoload: false
+
+  # Name prefix for database files.  Can be prefixed with a path.
+  name: "minigame"

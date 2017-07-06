@@ -1,5 +1,6 @@
 package net.acomputerdog.minigamelib;
 
+import net.acomputerdog.minigamelib.engine.MinigameEventHandler;
 import net.acomputerdog.plugindb.DBSettings;
 import net.acomputerdog.plugindb.PluginDB;
 import net.acomputerdog.plugindb.db.Database;
@@ -15,7 +16,11 @@ import java.io.Reader;
 public abstract class MinigamePlugin extends JavaPlugin {
     private FileConfiguration minigameConfig;
 
+    // Plugin database
     private PluginDB pluginDB;
+
+    // event handler
+    private MinigameEventHandler eventHandler;
 
     @Override
     public void onEnable() {
@@ -27,6 +32,8 @@ public abstract class MinigamePlugin extends JavaPlugin {
             pluginDB = loadDatabase();
         }
 
+        // initialize handler
+        eventHandler = new MinigameEventHandler(this);
     }
 
     @Override
@@ -34,6 +41,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
         if (pluginDB != null) {
             pluginDB.disconnect();
         }
+
     }
 
     private PluginDB loadDatabase() {

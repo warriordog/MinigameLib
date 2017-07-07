@@ -41,4 +41,8 @@ public class PlayerManager {
         // remove player flag
         p.removeMetadata(METADATA_KEY_PLAYER_IN_AREA, plugin);
     }
+
+    public void onPlayerQuitMinigame(Player p) {
+
+    }
 }

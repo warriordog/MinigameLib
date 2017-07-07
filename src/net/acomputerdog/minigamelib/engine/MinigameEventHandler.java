@@ -73,6 +73,16 @@ public class MinigameEventHandler implements Listener {
         checkPlayerInArea(e.getPlayer(), e.getTo());
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerExitArea(PlayerExitAreaEvent e) {
+        playerManager.onPlayerExitArea(e.getPlayer());
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onPlayerQuitMinigame(PlayerQuitMinigameEvent e) {
+        playerManager.onPlayerQuitMinigame(e.getPlayer());
+    }
+
     @EventHandler // can't stop a player from leaving, so don't ignore canceled
     public void onPlayerLogout(PlayerQuitEvent e) {
         plugin.getServer().getPluginManager().callEvent(new PlayerExitAreaEvent(e.getPlayer()));

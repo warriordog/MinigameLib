@@ -87,5 +87,6 @@ public class MinigameEventHandler implements Listener {
     public void onPlayerLogout(PlayerQuitEvent e) {
         plugin.getServer().getPluginManager().callEvent(new PlayerExitAreaEvent(e.getPlayer()));
         plugin.getServer().getPluginManager().callEvent(new PlayerQuitMinigameEvent(e.getPlayer()));
+        playerManager.onPlayerQuitServer(e.getPlayer());
     }
 }

@@ -5,12 +5,17 @@ import net.acomputerdog.minigamelib.metadata.FlagMetadata;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.MetadataValue;
 
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PlayerManager {
     public static final String METADATA_KEY_PLAYER_IN_AREA = "MinigameLib.player_in_area";
 
     private final MinigamePlugin plugin;
+
+    // linked list because players will be often removed from middle, and only access should be in order
+    private final List<Player> playersInArea = new LinkedList<>();
 
     public PlayerManager(MinigamePlugin plugin) {
         this.plugin = plugin;
@@ -35,14 +40,25 @@ public class PlayerManager {
     public void onPlayerEnterArea(Player p) {
         // add player flag
         p.setMetadata(METADATA_KEY_PLAYER_IN_AREA, new FlagMetadata(plugin, true));
+        playersInArea.add(p);
     }
 
     public void onPlayerExitArea(Player p) {
         // remove player flag
         p.removeMetadata(METADATA_KEY_PLAYER_IN_AREA, plugin);
+        playersInArea.remove(p);
     }
 
     public void onPlayerQuitMinigame(Player p) {
+        onPlayerExitArea(p);
+    }
 
+    // like onPlayerQuitMinigame, but need to destroy all Player object references
+    public void onPlayerQuitServer(Player p) {
+        onPlayerQuitMinigame(p);
+    }
+
+    public List<Player> getPlayersInArea() {
+        return Collections.unmodifiableList(playersInArea);
     }
 }

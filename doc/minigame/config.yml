@@ -10,3 +10,67 @@ database:
 
   # Name prefix for database files.  Can be prefixed with a path.
   name: "minigame"
+
+# Area settings
+area:
+  # Type of area that minigame is active in.
+  #   GLOBAL  = server wide
+  #   WORLD   = per-world
+  #   FLAT    = single 2D area (no Y)
+  #   AREA    = single 3D area
+  #   F_AREA  = single 3D area (double-precision floating point number)
+  #   FLATS   = multiple 2D areas (no Y)
+  #   AREAS   = multiple 3D areas
+  #   F_AREAS = multiple 3D areas (double-precision floating point number)
+  #   CUSTOM  = override getCustomArea() in plugin class
+  type: GLOBAL
+
+  # World to work in (WORLD, FLAT, AREA, F_AREA modes only)
+  world_name: "World"
+
+  # First corner (FLAT, AREA, F_AREA modes only)
+  #   Use doubles for F_AREA
+  #   [x, y, z] OR [x, z]
+  corner_1: [0, 0, 0]
+
+  # Second corner (FLAT, AREA, F_AREA modes only)
+  #   Use doubles for F_AREA
+  #   [x, y, z] OR [x, z]
+  corner_2: [0, 0, 0]
+
+  # Area definitions (FLATS, AREAS, F_AREAS modes only)
+  #   For each area, make a named subsection and give it fields "world_name", "corner_1", and "corner_2".
+  #   Section names do not matter.
+  areas:
+
+    # First area, name can be anything
+    sample_area_1:
+
+      # World of this area
+      world_name: "World1"
+
+      # 1st corner
+      #   Use doubles for F_AREAS
+      #   [x, y, z] OR [x, z]
+      corner_1: [0, 0, 0]
+
+      # Second corner
+      #   Use doubles for F_AREAS
+      #   [x, y, z] OR [x, z]
+      corner_2: [0, 0, 0]
+
+    # Second area, name can also be anything
+    sample_area_2:
+
+      # World of this area
+      world_name: "World2"
+
+      # 1st corner
+      #   Use doubles for F_AREAS
+      #   [x, y, z] OR [x, z]
+      corner_1: [0, 0, 0]
+
+      # Second corner
+      #   Use doubles for F_AREAS
+      #   [x, y, z] OR [x, z]
+      corner_2: [0, 0, 0]

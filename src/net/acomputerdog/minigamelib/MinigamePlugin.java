@@ -1,5 +1,6 @@
 package net.acomputerdog.minigamelib;
 
+import net.acomputerdog.minigamelib.area.Area;
 import net.acomputerdog.minigamelib.engine.MinigameEventHandler;
 import net.acomputerdog.plugindb.DBSettings;
 import net.acomputerdog.plugindb.PluginDB;
@@ -69,6 +70,15 @@ public abstract class MinigamePlugin extends JavaPlugin {
             getLogger().severe("Configuration error in minigame profile.");
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Create a custom Area that defines the game area
+     *
+     * @return return an Area object that will encase the game area
+     */
+    public Area getCustomArea() {
+        return null;
     }
 
     public PluginDB getPluginDB() {

@@ -51,4 +51,10 @@ public enum AreaTypes {
     private static Area createAreasOfFAreas(ConfigurationSection cfg, MinigamePlugin plugin) {
         return createAreas(cfg, plugin, F_AREA);
     }
+
+    public static Area createArea(ConfigurationSection cfg, MinigamePlugin plugin) {
+        String typeName = cfg.getString("area.type");
+        AreaTypes type = valueOf(typeName);
+        return type.createInstance(cfg, plugin);
+    }
 }

@@ -1,6 +1,7 @@
 package net.acomputerdog.minigamelib;
 
 import net.acomputerdog.minigamelib.area.Area;
+import net.acomputerdog.minigamelib.area.AreaTypes;
 import net.acomputerdog.minigamelib.engine.MinigameEventHandler;
 import net.acomputerdog.plugindb.DBSettings;
 import net.acomputerdog.plugindb.PluginDB;
@@ -23,6 +24,9 @@ public abstract class MinigamePlugin extends JavaPlugin {
     // event handler
     private MinigameEventHandler eventHandler;
 
+    // game area
+    private Area gameArea;
+
     @Override
     public void onEnable() {
         // read config for this minigame
@@ -32,6 +36,9 @@ public abstract class MinigamePlugin extends JavaPlugin {
         if (minigameConfig.getBoolean("database.enabled")) {
             pluginDB = loadDatabase();
         }
+
+        // create game area
+        gameArea = AreaTypes.createArea(minigameConfig, this);
 
         // initialize handler
         eventHandler = new MinigameEventHandler(this);
@@ -73,7 +80,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
     }
 
     /**
-     * Create a custom Area that defines the game area
+     * Create a custom Area that defines the game area.  May be called before onEnable()
      *
      * @return return an Area object that will encase the game area
      */
@@ -87,5 +94,9 @@ public abstract class MinigamePlugin extends JavaPlugin {
 
     public Database getDB() {
         return pluginDB.getDatabase();
+    }
+
+    public Area getGameArea() {
+        return gameArea;
     }
 }

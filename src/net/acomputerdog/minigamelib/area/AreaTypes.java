@@ -16,7 +16,7 @@ public enum AreaTypes {
     FLATS(AreaTypes::createAreasOfFlats),
     AREAS(AreaTypes::createAreasOfAreas),
     F_AREAS(AreaTypes::createAreasOfFAreas),
-    CUSTOM((cfg, plugin) -> plugin.getCustomArea());
+    CUSTOM((cfg, plugin) -> plugin.createCustomArea());
     ;
 
     private final BiFunction<ConfigurationSection, MinigamePlugin, Area> producer;

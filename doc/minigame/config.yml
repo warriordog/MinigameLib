@@ -5,7 +5,7 @@ redirect:
   # if true, configuration entries specified as "?" will be redirected to a different config
   enabled: false
 
-  # If true, configuration should be returned from plugin.getCustomConfig()
+  # If true, configuration should be returned from plugin.createCustomConfig()
   # If false:
   #   * config file is plugin.getDataDirectory() / minigame.yml
   #   * config file will be automatically copied from pluginJar/default/minigame.yml
@@ -33,7 +33,7 @@ area:
   #   FLATS   = multiple 2D areas (no Y)
   #   AREAS   = multiple 3D areas
   #   F_AREAS = multiple 3D areas (double-precision floating point number)
-  #   CUSTOM  = override getCustomArea() in plugin class
+  #   CUSTOM  = override createCustomArea() in plugin class
   type: GLOBAL
 
   # World to work in (WORLD, FLAT, AREA, F_AREA modes only)

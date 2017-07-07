@@ -3,6 +3,7 @@ package net.acomputerdog.minigamelib;
 import net.acomputerdog.minigamelib.area.Area;
 import net.acomputerdog.minigamelib.area.AreaTypes;
 import net.acomputerdog.minigamelib.engine.MinigameEventHandler;
+import net.acomputerdog.minigamelib.engine.PlayerManager;
 import net.acomputerdog.minigamelib.util.FileUtils;
 import net.acomputerdog.minigamelib.util.RedirectableConfigurationSection;
 import net.acomputerdog.plugindb.DBSettings;
@@ -30,6 +31,9 @@ public abstract class MinigamePlugin extends JavaPlugin {
     // game area
     private Area gameArea;
 
+    // player manager
+    private PlayerManager playerManager;
+
     @Override
     public void onEnable() {
         // read config for this minigame
@@ -43,8 +47,12 @@ public abstract class MinigamePlugin extends JavaPlugin {
         // create game area
         gameArea = AreaTypes.createArea(minigameConfig, this);
 
+        // create player manager
+        playerManager = new PlayerManager(this);
+
         // initialize handler
         eventHandler = new MinigameEventHandler(this);
+        eventHandler.register();
     }
 
     @Override
@@ -52,7 +60,9 @@ public abstract class MinigamePlugin extends JavaPlugin {
         if (pluginDB != null) {
             pluginDB.disconnect();
         }
-
+        if (eventHandler != null) {
+            eventHandler.unregister();
+        }
     }
 
     private PluginDB loadDatabase() {
@@ -86,7 +96,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
             ConfigurationSection alternate;
 
             if (mainCfg.getBoolean("redirect.custom_create")) {
-                alternate = getCustomConfig();
+                alternate = createCustomConfig();
             } else {
                 File dir = getDataFolder();
 
@@ -114,7 +124,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
      *
      * @return return an Area object that will encase the game area
      */
-    public Area getCustomArea() {
+    public Area createCustomArea() {
         return null;
     }
 
@@ -124,7 +134,7 @@ public abstract class MinigamePlugin extends JavaPlugin {
      *
      * @return return a ConfigurationSection with keys and values to match undefined ones in the internal config
      */
-    public ConfigurationSection getCustomConfig() {
+    public ConfigurationSection createCustomConfig() {
         return null;
     }
 
@@ -138,5 +148,17 @@ public abstract class MinigamePlugin extends JavaPlugin {
 
     public Area getGameArea() {
         return gameArea;
+    }
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    public MinigameEventHandler getEventHandler() {
+        return eventHandler;
+    }
+
+    public ConfigurationSection getMinigameConfig() {
+        return minigameConfig;
     }
 }

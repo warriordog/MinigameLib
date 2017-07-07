@@ -1,5 +1,16 @@
 # MinigameLib config
 
+# Config redirect settings
+redirect:
+  # if true, configuration entries specified as "?" will be redirected to a different config
+  enabled: false
+
+  # If true, configuration should be returned from plugin.getCustomConfig()
+  # If false:
+  #   * config file is plugin.getDataDirectory() / minigame.yml
+  #   * config file will be automatically copied from pluginJar/default/minigame.yml
+  custom_create: false
+
 # Database settings
 database:
   # If true, a database will be automatically connected.

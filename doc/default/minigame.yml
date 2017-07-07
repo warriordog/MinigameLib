@@ -1,0 +1,7 @@
+# Default config override file
+# Will be copied to plugin root if enabled in config
+
+# Example override, some_section.some_subsection.some_key must be "?" in minigame/config.yml
+some_section:
+  some_subsection:
+    some_key: "some_val"
